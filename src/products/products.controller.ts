@@ -8,4 +8,5 @@ export class ProductsController {
     getProducts(): string {
         return "List of products";
     }
+    
 }
