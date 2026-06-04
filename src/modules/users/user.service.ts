@@ -14,6 +14,17 @@ export class UsersService {
     return rows;
   }
 
+  async listarMinhasTarefas(userId: number) {
+    const db = await connectDB();
+
+    const [rows] = await db.query(
+      "SELECT * FROM tasks WHERE user_id = ?",
+      [userId]
+    );
+
+    return rows;
+  }
+
   async criarUsuario(name: string, password: string, email: string) {
     try {
     const db = await connectDB();

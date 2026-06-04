@@ -14,6 +14,12 @@ export class UsersController {
     return this.usersService.listarUsuarios();
   }
 
+  @Get("/my-tasks")
+  async listarMinhasTarefas() {
+    const userId = 1; // Exemplo: ID do usuário logado
+    return this.usersService.listarMinhasTarefas(userId);
+  }
+
   @Post()
   async criar(@Body() body: CreateUserDTO) {
     return this.usersService.criarUsuario(body.name, body.password, body.email);
