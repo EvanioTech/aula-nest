@@ -1,5 +1,26 @@
 import { Body, Controller, Get, Param, Post, Query } from "@nestjs/common";
 import { randomUUID } from "crypto";
+import { UsersService } from "./user.service";
+
+@Controller("/users")
+export class UsersController {
+  constructor(
+    private readonly usersService: UsersService
+  ) {}
+
+  @Get()
+  async listar() {
+    return this.usersService.listarUsuarios();
+  }
+
+  @Post()
+  async criar(@Body() data: { name: string; password: string; email: string }) {
+    return this.usersService.criarUsuario(data.name, data.password, data.email);
+  }
+}
+
+// Revisar
+/*
 
 type ParamsUser = {
     id: string;
@@ -40,4 +61,7 @@ export class UserController {
             createdAt: new Date().toLocaleDateString('pt-BR'),
         }
     }
+        
 }
+
+*/
