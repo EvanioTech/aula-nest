@@ -14,7 +14,7 @@ export class UsersController {
     return this.usersService.listarUsuarios();
   }
 
-  @Get("/my-tasks")
+  @Get("/tasks")
   async listarMinhasTarefas() {
     const userId = 1; // Exemplo: ID do usuário logado
     return this.usersService.listarMinhasTarefas(userId);
@@ -30,7 +30,7 @@ export class UsersController {
     return this.usersService.updateTask(id, title);
   }
 
-  @Delete("/my-tasks/:id")
+  @Delete("/tasks/:id")
   async deletarTarefa(@Param('id') id: number) {
     return this.usersService.deletarTarefa(id);
   }
