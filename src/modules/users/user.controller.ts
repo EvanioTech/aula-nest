@@ -1,5 +1,6 @@
-import { Body, Controller, Get, Param, Post, Query } from "@nestjs/common";
-import { randomUUID } from "crypto";
+import { Body, Controller, Get,  Post } from "@nestjs/common";
+import { CreateUserDTO } from "./dto/create-user.dto";
+
 import { UsersService } from "./user.service";
 
 @Controller("/users")
@@ -14,8 +15,8 @@ export class UsersController {
   }
 
   @Post()
-  async criar(@Body() data: { name: string; password: string; email: string }) {
-    return this.usersService.criarUsuario(data.name, data.password, data.email);
+  async criar(@Body() body: CreateUserDTO) {
+    return this.usersService.criarUsuario(body.name, body.password, body.email);
   }
 }
 
