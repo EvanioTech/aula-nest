@@ -16,7 +16,7 @@ export async function initDatabase() {
   console.log("Tabela users pronta");
 
   await db.query(`
-    CREATE TABLE IF NOT EXISTS todos (
+    CREATE TABLE IF NOT EXISTS tasks (
   id INT AUTO_INCREMENT PRIMARY KEY,
   user_id INT NOT NULL,
   title VARCHAR(255) NOT NULL,
