@@ -1,5 +1,5 @@
 import { Injectable,BadRequestException } from "@nestjs/common";
-import { connectDB } from "./../database/db";
+import { connectDB } from "../../infra/database/db";
 
 @Injectable()
 export class UsersService {
