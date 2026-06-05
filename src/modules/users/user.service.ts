@@ -1,7 +1,7 @@
 import { Injectable,BadRequestException } from "@nestjs/common";
 import { connectDB } from "../../infra/database/db";
 import { ResultSetHeader } from "mysql2";
-import { title } from "process";
+
 
 @Injectable()
 export class UsersService {

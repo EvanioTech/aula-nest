@@ -1,6 +1,8 @@
 import { Body, Controller, Delete, Get,  Post, Param, Put, BadRequestException , Req} from "@nestjs/common";
 import { CreateUserDTO } from "./dto/create-user.dto";
 import * as bcrypt from "bcrypt";
+import {JwtAuthGuard} from "src/auth/jwwt-auth.guard";
+import { UseGuards } from "@nestjs/common";
 
 import { UsersService } from "./user.service";
 
@@ -15,6 +17,7 @@ export class UsersController {
     return this.usersService.listarUsuarios();
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get("/tasks")
   async listarMinhasTarefas(@Req() req) {
     const userId = req.user?.userId; 
