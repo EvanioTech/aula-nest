@@ -18,9 +18,7 @@ export class TasksService {
 
         return rows;
     }
-
-    
-    
+  
 
 async criar(createTaskDTO: CreateTaskDTO) {
 
@@ -32,21 +30,19 @@ async criar(createTaskDTO: CreateTaskDTO) {
     completed
   } = createTaskDTO;
 
-  // VERIFICA USUÁRIO
+  
 
   const [user] = await db.query(
     "SELECT id FROM users WHERE id = ?",
     [userId]
   );
 
-  // ARRAY VAZIO
   if ((user as any[]).length === 0) {
     throw new BadRequestException(
       "Usuário não encontrado"
     );
   }
 
-  // CRIA TASK
   const completedValue = completed ? 1 : 0;
 
   const [rows] = await db.query(
