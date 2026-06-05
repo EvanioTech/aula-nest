@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get,  Post, Param, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get,  Post, Param, Put, BadRequestException , Req} from "@nestjs/common";
 import { CreateUserDTO } from "./dto/create-user.dto";
 import * as bcrypt from "bcrypt";
 
@@ -16,8 +16,12 @@ export class UsersController {
   }
 
   @Get("/tasks")
-  async listarMinhasTarefas() {
-    const userId = 1; // Substitua pelo ID do usuário autenticado
+  async listarMinhasTarefas(@Req() req) {
+    const userId = req.user?.userId; 
+
+    if (!userId) {
+      throw new BadRequestException("ID do usuário não encontrado");
+    }
     return this.usersService.listarMinhasTarefas(userId);
   }
 
