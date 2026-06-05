@@ -17,7 +17,7 @@ export class UsersController {
 
   @Get("/tasks")
   async listarMinhasTarefas() {
-    const userId = 1; // Exemplo: ID do usuário logado
+    const userId = 1; // Substitua pelo ID do usuário autenticado
     return this.usersService.listarMinhasTarefas(userId);
   }
 

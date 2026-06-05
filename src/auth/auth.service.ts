@@ -2,10 +2,12 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { CreateLoginDTO } from './dto-login/create-login.dto';
 import { connectDB } from 'src/infra/database/db';
 import * as bcrypt from "bcrypt";
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
 
+    constructor(private readonly jwtService: JwtService) {}
 
     async login(createLoginDTO: CreateLoginDTO) {
         const db = await connectDB();
@@ -32,8 +34,10 @@ export class AuthService {
             throw new UnauthorizedException("Email ou senha incorretos");
         }
 
+        const token = this.jwtService.sign({ userId: user.id, email: user.email });
 
 
-        return { message: "Login realizado com sucesso" };
+
+        return { message: "Login realizado com sucesso", token };
     }
 }
