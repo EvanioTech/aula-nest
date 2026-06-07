@@ -1,5 +1,5 @@
 import { Injectable,BadRequestException } from "@nestjs/common";
-import { connectDB } from "../../infra/database/db";
+import { pool } from "../../infra/database/db";
 import { ResultSetHeader } from "mysql2";
 
 
@@ -7,9 +7,9 @@ import { ResultSetHeader } from "mysql2";
 export class UsersService {
 
   async listarUsuarios() {
-    const db = await connectDB();
+    
 
-    const [rows] = await db.query(
+    const [rows] = await pool.query(
       "SELECT * FROM users"
     );
 
@@ -17,9 +17,8 @@ export class UsersService {
   }
 
   async listarMinhasTarefas(userId: number) {
-    const db = await connectDB();
 
-    const [rows] = await db.query(
+    const [rows] = await pool.query(
       "SELECT * FROM tasks WHERE user_id = ?",
       [userId]
     );
@@ -28,9 +27,9 @@ export class UsersService {
   }
 
   async deletarTarefa(id: number) {
-    const db = await connectDB();
+   
 
-    const [result] = await db.query<ResultSetHeader>(
+    const [result] = await pool.query<ResultSetHeader>(
       "DELETE FROM tasks WHERE id = ?",
       [id]
     );
@@ -43,9 +42,8 @@ export class UsersService {
 
   async criarUsuario(name: string, password: string, email: string) {
     try {
-    const db = await connectDB();
 
-    const [rows] = await db.query(
+    const [rows] = await pool.query(
       "INSERT INTO users (name, password,email) VALUES (?, ?, ?)",
       [name, password, email]
     );
@@ -63,10 +61,8 @@ export class UsersService {
   }
 
   async updateTask(id: number, title: string) {
-    const db = await connectDB();
-
-    const [rows] = await db.query(
-      "update tasks SET title = ? WHERE id = ?",
+    const [rows] = await pool.query(
+      "UPDATE tasks SET title = ? WHERE id = ?",
       [title, id]
     );
 

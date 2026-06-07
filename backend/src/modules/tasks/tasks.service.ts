@@ -1,6 +1,6 @@
 import { Injectable, BadRequestException } from "@nestjs/common";
 import { CreateTaskDTO } from "./dto/create-tasks.dto";
-import { connectDB } from "../../infra/database/db";
+import { pool } from "../../infra/database/db";
 
 
 
@@ -11,8 +11,8 @@ export class TasksService {
     
 
     async listar() {
-        const db = await connectDB();
-        const [rows] = await db.query(
+        
+        const [rows] = await pool.query(
             "SELECT * FROM tasks"
         );
 
@@ -22,8 +22,6 @@ export class TasksService {
 
 async criar(createTaskDTO: CreateTaskDTO) {
 
-  const db = await connectDB();
-
   const {
     userId,
     title,
@@ -32,7 +30,7 @@ async criar(createTaskDTO: CreateTaskDTO) {
 
   
 
-  const [user] = await db.query(
+  const [user] = await pool.query(
     "SELECT id FROM users WHERE id = ?",
     [userId]
   );
@@ -45,7 +43,7 @@ async criar(createTaskDTO: CreateTaskDTO) {
 
   const completedValue = completed ? 1 : 0;
 
-  const [rows] = await db.query(
+  const [rows] = await pool.query(
     `
     INSERT INTO tasks
     (user_id, title, completed)

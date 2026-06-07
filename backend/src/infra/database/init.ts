@@ -1,7 +1,7 @@
-import { connectDB } from "./db";
+import { pool } from "./db";
 
 export async function initDatabase() {
-  const db = await connectDB();
+  const db = await pool;
 
   await db.query(`
     CREATE TABLE IF NOT EXISTS users (
