@@ -1,9 +1,9 @@
 import { pool } from "./db";
 
 export async function initDatabase() {
-  const db = await pool;
+  
 
-  await db.query(`
+  await pool.query(`
     CREATE TABLE IF NOT EXISTS users (
       id INT AUTO_INCREMENT PRIMARY KEY,
       name VARCHAR(100) NOT NULL,
@@ -15,7 +15,7 @@ export async function initDatabase() {
 
   console.log("Tabela users pronta");
 
-  await db.query(`
+  await pool.query(`
     CREATE TABLE IF NOT EXISTS tasks (
   id INT AUTO_INCREMENT PRIMARY KEY,
   user_id INT NOT NULL,
