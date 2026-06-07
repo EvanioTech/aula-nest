@@ -1,6 +1,6 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { CreateLoginDTO } from './dto-login/create-login.dto';
-import { connectDB } from 'src/infra/database/db';
+import { pool } from 'src/infra/database/db';
 import * as bcrypt from "bcrypt";
 import { JwtService } from '@nestjs/jwt';
 
@@ -10,11 +10,10 @@ export class AuthService {
     constructor(private readonly jwtService: JwtService) {}
 
     async login(createLoginDTO: CreateLoginDTO) {
-        const db = await connectDB();
 
         const { email, password } = createLoginDTO;
 
-        const [rows] = await db.query(
+        const [rows] = await pool.query(
             "SELECT * FROM users WHERE email = ?",
             [email]
         );
