@@ -1,0 +1,112 @@
+diff --git a/node_modules/react-native-css-interop/.cache/android.js b/node_modules/react-native-css-interop/.cache/android.js
+new file mode 100644
+index 0000000..e69de29
+diff --git a/node_modules/react-native-css-interop/.cache/ios.js b/node_modules/react-native-css-interop/.cache/ios.js
+new file mode 100644
+index 0000000..e69de29
+diff --git a/node_modules/react-native-css-interop/.cache/macos.js b/node_modules/react-native-css-interop/.cache/macos.js
+new file mode 100644
+index 0000000..e69de29
+diff --git a/node_modules/react-native-css-interop/.cache/native.js b/node_modules/react-native-css-interop/.cache/native.js
+new file mode 100644
+index 0000000..e69de29
+diff --git a/node_modules/react-native-css-interop/.cache/windows.js b/node_modules/react-native-css-interop/.cache/windows.js
+new file mode 100644
+index 0000000..e69de29
+diff --git a/node_modules/react-native-css-interop/dist/metro/index.js b/node_modules/react-native-css-interop/dist/metro/index.js
+index 6ea4a69..5ab0fa4 100644
+--- a/node_modules/react-native-css-interop/dist/metro/index.js
++++ b/node_modules/react-native-css-interop/dist/metro/index.js
+@@ -4,7 +4,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
+ };
+ Object.defineProperty(exports, "__esModule", { value: true });
+ exports.withCssInterop = withCssInterop;
+-const assert_1 = __importDefault(require("assert"));
+ const fs_1 = __importDefault(require("fs"));
+ const promises_1 = __importDefault(require("fs/promises"));
+ const path_1 = __importDefault(require("path"));
+@@ -12,9 +11,7 @@ const connect_1 = __importDefault(require("connect"));
+ const debug_1 = require("debug");
+ const css_to_rn_1 = require("../css-to-rn");
+ const expo_1 = require("./expo");
+-const EMPTY_SET = new Set();
+ let haste;
+-let fileSystem;
+ let virtualModulesPossible = undefined;
+ const virtualModules = new Map();
+ const outputDirectory = path_1.default.resolve(__dirname, "../../.cache");
+@@ -102,8 +99,7 @@ function getConfig(config, options) {
+                             .getDependencyGraph()
+                             .then(async (graph) => {
+                             haste = graph._haste;
+-                            fileSystem = graph._fileSystem;
+-                            ensureFileSystemPatched(fileSystem);
++                            ensureFileSystemPatched(graph._fileSystem);
+                             ensureBundlerPatched(bundler);
+                         });
+                         server.use(async (_, __, next) => {
+@@ -148,40 +144,6 @@ function getConfig(config, options) {
+         },
+     };
+ }
+-function emitHasteFileChange(filePath, debug) {
+-    (0, assert_1.default)(haste != null);
+-    try {
+-        const modifiedTime = Date.now();
+-        haste.emit("change", {
+-            eventsQueue: [
+-                {
+-                    filePath,
+-                    metadata: {
+-                        modifiedTime: Date.now(),
+-                        size: 1,
+-                        type: "virtual",
+-                    },
+-                    type: "change",
+-                },
+-            ],
+-            get rootDir() {
+-                const rootDir = fileSystem?.lookup("");
+-                (0, assert_1.default)(rootDir?.exists && typeof rootDir.realPath === "string");
+-                return rootDir.realPath;
+-            },
+-            changes: {
+-                addedDirectories: EMPTY_SET,
+-                removedDirectories: EMPTY_SET,
+-                addedFiles: EMPTY_SET,
+-                removedFiles: EMPTY_SET,
+-                changedFiles: new Set([[filePath, { isSymlink: false, modifiedTime }]]),
+-            },
+-        });
+-    }
+-    catch (error) {
+-        debug("virtualStyles.emit failed", error);
+-    }
+-}
+ async function startCSSProcessor(filePath, platform, isDev, { input, getCSSForPlatform, ...options }, debug) {
+     if (virtualModules.has(filePath)) {
+         return;
+@@ -214,7 +176,22 @@ async function startCSSProcessor(filePath, platform, isDev, { input, getCSSForPl
+                 ? css
+                 : getNativeJS((0, css_to_rn_1.cssToReactNativeRuntime)(css, options), debug)));
+             debug(`virtualStyles.emit ${platform}`);
+-            emitHasteFileChange(filePath, debug);
++            haste.emit("change", {
++                changes: {
++                    addedFiles: new Map(),
++                    modifiedFiles: new Map([
++                        [
++                            filePath,
++                            {
++                                modifiedTime: Date.now(),
++                                isSymlink: false,
++                            },
++                        ],
++                    ]),
++                    removedFiles: new Map(),
++                },
++                rootDir: "",
++            });
+         }).then((css) => {
+             debug(`virtualStyles.initial ${platform}`);
+             return platform === "web"
