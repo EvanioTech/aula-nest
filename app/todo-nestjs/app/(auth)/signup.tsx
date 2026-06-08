@@ -1,11 +1,14 @@
 import {View, Text} from 'react-native';
+import {LinearGradient} from 'expo-linear-gradient';
+import SignUpForm from '@/components/auth/SignUpForm';
+
 
 
 const SignupScreen = () => {
   return (
-    <View className="flex-1 items-center justify-center bg-white">
-      <Text >Signup Screen</Text>
-    </View>
+    <LinearGradient colors={['#6B46C1', '#B794F4']} className="flex-1 items-center justify-center">
+      <SignUpForm title="Cadastro" />
+      </LinearGradient>
   );
 }
 
