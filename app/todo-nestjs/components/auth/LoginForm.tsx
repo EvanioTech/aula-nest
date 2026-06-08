@@ -1,12 +1,14 @@
 import {View, Text } from 'react-native';
 import Input from '../ui/Input';
 import Button from '../ui/Button';
+import { useRouter } from 'expo-router';
 
 interface LoginFormProps {
   title?: string;
 }
 
 const LoginForm = ({ title }: LoginFormProps) => {
+    const router = useRouter();
   return (
     <View className=" justify-center items-center px-2">
       
@@ -15,8 +17,8 @@ const LoginForm = ({ title }: LoginFormProps) => {
       <Input label="Email:" placeholder="Digite seu email" />
 
       <Input label="Senha:" placeholder="Digite sua senha" secureTextEntry={true} />
-      <Button title="Entrar" onPress={() => {}} variant="primary"/>
-        <Button title="Quero me cadastrar" onPress={() => {}} variant="secondary"/>
+      <Button title="Entrar" onPress={() => router.push('/home')} variant="primary"/>
+        <Button title="Quero me cadastrar" onPress={() => router.push('/signup')} variant="secondary"/>
       </View>
       
     </View>
