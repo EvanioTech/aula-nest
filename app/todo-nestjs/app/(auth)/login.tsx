@@ -1,6 +1,7 @@
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import {LinearGradient} from 'expo-linear-gradient';
 import { cssInterop } from 'nativewind';
+import Button from '../../components/ui/button';
 
 
 cssInterop(LinearGradient, { className: 'style' });
@@ -29,13 +30,7 @@ const LoginScreen = () => {
         />
         
       </View>
-      <TouchableOpacity className=" w-72" >
-      <View className="bg-purple-500 p-2 rounded   items-center">
-        
-          <Text className="text-white font-bold py-2">Entrar</Text>
-        
-      </View>
-      </TouchableOpacity>
+      <Button title="Entrar" onPress={() => {}}/>
       </View>
       
     </View>
