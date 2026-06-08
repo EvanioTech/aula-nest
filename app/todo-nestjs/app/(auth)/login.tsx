@@ -2,6 +2,7 @@ import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import {LinearGradient} from 'expo-linear-gradient';
 import { cssInterop } from 'nativewind';
 import Button from '../../components/ui/button';
+import Input from '@/components/ui/input';
 
 
 cssInterop(LinearGradient, { className: 'style' });
@@ -13,23 +14,9 @@ const LoginScreen = () => {
       
         <Text className="text-4xl  text-red-300 mb-28">Todo nestjs</Text>
         <View className="bg-white bg-opacity-20 p-6 rounded-lg w-full max-w-md items-center">
-      <View className="mb-4 p-4 flex flex-row  rounded-lg w-full  gap-2 px-4 border border-gray-300">
-        <Text className="text-lg text-black font-bold mb-2">Email:</Text>
-        <TextInput
-          className="bg-white p-2 rounded w-72"
-          placeholder="Digite seu email"
-        />
-      </View>
+      <Input label="Email:" placeholder="Digite seu email" />
 
-      <View className="mb-4  p-4 flex flex-row  rounded-lg w-full gap-2 px-4 border border-gray-300">
-        <Text className="text-lg  text-black font-bold ">Senha:</Text>
-        <TextInput
-          className="bg-white p-2 rounded w-72"
-          placeholder="Digite sua senha"
-          secureTextEntry
-        />
-        
-      </View>
+      <Input label="Senha:" placeholder="Digite sua senha" secureTextEntry={true} />
       <Button title="Entrar" onPress={() => {}}/>
       </View>
       
