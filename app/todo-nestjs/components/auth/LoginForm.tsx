@@ -15,7 +15,8 @@ const LoginForm = ({ title }: LoginFormProps) => {
       <Input label="Email:" placeholder="Digite seu email" />
 
       <Input label="Senha:" placeholder="Digite sua senha" secureTextEntry={true} />
-      <Button title="Entrar" onPress={() => {}}/>
+      <Button title="Entrar" onPress={() => {}} variant="primary"/>
+        <Button title="Quero me cadastrar" onPress={() => {}} variant="secondary"/>
       </View>
       
     </View>
