@@ -13,4 +13,4 @@ export const createTask = async (title: string) => {
 export const deleteTask = async (id: number) => {
   const response = await api.delete(`/tasks/${id}`);
   return response.data;
-};
+};       
