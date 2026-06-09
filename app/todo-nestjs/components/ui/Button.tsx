@@ -4,14 +4,15 @@ interface ButtonProps {
   title: string;
   onPress: () => void;
   variant?: 'primary' | 'secondary';
+  loading?: boolean;
 }
 
-const Button = ({title, onPress, variant = 'primary'}: ButtonProps) => {
+const Button = ({title, onPress, variant = 'primary', loading = false}: ButtonProps) => {
   return (
     <TouchableOpacity className=" w-72" onPress={onPress}> 
           <View className={variant === 'primary' ? "bg-purple-500 p-2 rounded   items-center" : " p-2 rounded-full   items-center "}>
             
-              <Text className={variant === 'primary' ? "text-white font-bold py-2" : "text-black font-bold py-2"}>{title}</Text>
+              <Text className={variant === 'primary' ? "text-white font-bold py-2" : "text-black font-bold py-2"}>{loading ? 'Carregando...' : title}</Text>
             
           </View>
           </TouchableOpacity>
