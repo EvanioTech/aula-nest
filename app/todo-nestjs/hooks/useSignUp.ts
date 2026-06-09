@@ -7,11 +7,12 @@ export function useSignUp() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleSignUp = async (name: string, email: string, password: string) => {
+  const handleSignUp = async (name: string, email: string, password: string,clearFields: () => void) => {
     setLoading(true);
     setError(null);
     try {
       await createUser(name, email, password);
+        clearFields();
       router.push('/');
     } catch(e: any) {
       setError(e?.response?.data?.message || 'Erro ao cadastrar');

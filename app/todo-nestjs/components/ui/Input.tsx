@@ -5,9 +5,10 @@ interface InputProps {
   placeholder: string;
   secureTextEntry?: boolean;
   onChangeText?: (text: string) => void;
+  value?: string;
 }
 
-const Input = ({label, placeholder, secureTextEntry = false, onChangeText}: InputProps) => {
+const Input = ({label, placeholder, secureTextEntry = false, onChangeText, value}: InputProps) => {
   return (
     <View className="mb-4 p-4 flex flex-row rounded-lg w-full gap-2 px-4 border border-gray-300">
       <Text className="text-lg text-black font-bold">{label}</Text>
@@ -16,6 +17,7 @@ const Input = ({label, placeholder, secureTextEntry = false, onChangeText}: Inpu
         placeholder={placeholder}
         onChangeText={onChangeText}
         secureTextEntry={secureTextEntry}
+        value={value}
       />
     </View>
   );

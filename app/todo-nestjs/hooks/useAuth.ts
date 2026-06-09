@@ -12,7 +12,9 @@ export function useAuth() {
     setError(null);
     try {
       await login(email, password);
+      
       router.push('/');
+      
     } catch {
         
       setError('Email ou senha incorretos');
