@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
-import { signup } from '@/services/auth';
+import {createUser} from '@/services/signup';
 
 export function useSignUp() {
   const router = useRouter();
@@ -11,8 +11,8 @@ export function useSignUp() {
     setLoading(true);
     setError(null);
     try {
-      await signup(name, email, password);
-      router.push('/login');
+      await createUser(name, email, password);
+      router.push('/');
     } catch(e: any) {
       setError(e?.response?.data?.message || 'Erro ao cadastrar');
     } finally {
