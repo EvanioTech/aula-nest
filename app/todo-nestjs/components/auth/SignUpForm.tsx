@@ -18,7 +18,7 @@ const SignUpForm = ({ title }: SignUpFormProps) => {
 
       <Input label="Senha:" placeholder="Digite sua senha" secureTextEntry={true} />
       <Input label="Confirmar Senha:" placeholder="Digite sua senha novamente" secureTextEntry={true} />
-      <Button title="Cadastrar" onPress={() => router.push('/home')} variant="primary"/>
+      <Button title="Cadastrar" onPress={() => router.push('/')} variant="primary"/>
         <Button title="Quero me logar" onPress={() => router.push('/login')} variant="secondary"/>
       </View>
       
