@@ -38,6 +38,8 @@ const SignUpForm = ({ title }: SignUpFormProps) => {
       <Button title="Cadastrar" onPress={() =>{
         if (password !== confirmPassword) {
           alert('As senhas não coincidem'); return
+          } if(!name || !email || !password) {
+            alert('Preencha todos os campos'); return
           }  { handleSignUp(name, email, password, clearFields); }}} variant="primary" loading={loading}/>
         <Button title="Quero me logar" onPress={() => router.push('/login')} variant="secondary"/>
       </View>
