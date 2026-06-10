@@ -1,8 +1,11 @@
 import "./../../global.css";
 import {LinearGradient} from "expo-linear-gradient";
 import TaskList from "@/components/tasks/TaskList";
+import useTasks from "@/hooks/useTasks";
 
 export default function TabOneScreen() {
+  const { tasks, completeTask, deleteTask } = useTasks();
+
   return (
     <LinearGradient
     colors={['#6a11cb', '#2575fc']}
@@ -10,14 +13,11 @@ export default function TabOneScreen() {
   >
     
       <TaskList
-        tasks={[
-          { id: '1', title: 'Buy groceries', completed: false },
-          { id: '2', title: 'Walk the dog', completed: true },
-          { id: '3', title: 'Read a book', completed: false },
-        ]}
-        onComplete={(id) => console.log(`Complete task ${id}`)}
-        onDelete={(id) => console.log(`Delete task ${id}`)}
+        tasks={tasks}
+        onComplete={completeTask}
+        onDelete={deleteTask}
       />
+        
    
   </LinearGradient>
   );
