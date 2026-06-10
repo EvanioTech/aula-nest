@@ -9,11 +9,15 @@ export default function TabOneScreen() {
     style={{ flex: 1 }}
   >
     
-      <TaskList tasks={[
-        { id: '1', title: 'Buy groceries', completed: false },
-        { id: '2', title: 'Walk the dog', completed: true },
-        { id: '3', title: 'Finish project', completed: false },
-      ]} />
+      <TaskList
+        tasks={[
+          { id: '1', title: 'Buy groceries', completed: false },
+          { id: '2', title: 'Walk the dog', completed: true },
+          { id: '3', title: 'Read a book', completed: false },
+        ]}
+        onComplete={(id) => console.log(`Complete task ${id}`)}
+        onDelete={(id) => console.log(`Delete task ${id}`)}
+      />
    
   </LinearGradient>
   );

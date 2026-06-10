@@ -10,13 +10,13 @@ interface Task {
 
 interface TaskListProps {
   tasks: Task[];
+  onComplete: (id: string) => void;
+  onDelete: (id: string) => void;
 }
 
-const TaskList = ({ tasks }: TaskListProps) => {
+const TaskList = ({ tasks, onComplete, onDelete }: TaskListProps) => {
   return (
-    
     <FlatList
-    
       data={tasks}
       keyExtractor={(item) => item.id}
       ListHeaderComponent={
@@ -25,16 +25,19 @@ const TaskList = ({ tasks }: TaskListProps) => {
         </Text>
       }
       renderItem={({ item }) => (
-        <Card title={item.title} completed={item.completed} />
+        <Card
+          title={item.title}
+          completed={item.completed}
+          onComplete={() => onComplete(item.id)}
+          onDelete={() => onDelete(item.id)}
+        />
       )}
-      contentContainerStyle={{ 
+      contentContainerStyle={{
         flexGrow: 1,
         justifyContent: 'center',
-        paddingHorizontal: 16
-
-       }}
+        paddingHorizontal: 16,
+      }}
     />
-    
   );
 };
 
