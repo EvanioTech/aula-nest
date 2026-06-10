@@ -34,6 +34,7 @@ const TaskList = ({ tasks, onComplete, onDelete, onCreate }: TaskListProps) => {
           completed={item.completed}
           onComplete={() => onComplete(item.id)}
           onDelete={() => onDelete(item.id)}
+          direction="row"
         />
       )}
       contentContainerStyle={{

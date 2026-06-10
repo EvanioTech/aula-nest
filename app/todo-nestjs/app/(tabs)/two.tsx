@@ -2,30 +2,20 @@ import { StyleSheet } from 'react-native';
 
 
 import { Text, View } from '@/components/Themed';
+import { LinearGradient } from 'expo-linear-gradient';
+import Card from '@/components/ui/Card';
+import SettingsList from '@/components/settings/SettingsList';
 
 export default function TabTwoScreen() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+   <LinearGradient
+    colors={['#6a11cb', '#2575fc']}
+    style={{ flex: 1 }}
+  >
+    <SettingsList onLogout={() => alert('Logout')} />
       
-    </View>
+    </LinearGradient>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-});
+
