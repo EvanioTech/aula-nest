@@ -1,6 +1,6 @@
-import { FlatList, Text } from 'react-native';
+import { FlatList, Text,View } from 'react-native';
 import Card from '../ui/Card';
-
+import CreateTask from './CreateTask';
 
 interface Task {
   id: string;
@@ -12,17 +12,21 @@ interface TaskListProps {
   tasks: Task[];
   onComplete: (id: string) => void;
   onDelete: (id: string) => void;
+  onCreate: (title: string) => void;
 }
 
-const TaskList = ({ tasks, onComplete, onDelete }: TaskListProps) => {
+const TaskList = ({ tasks, onComplete, onDelete, onCreate }: TaskListProps) => {
   return (
     <FlatList
       data={tasks}
       keyExtractor={(item) => item.id}
       ListHeaderComponent={
-        <Text className="text-2xl font-bold text-pink-500 my-8 text-center">
-          My To-Do List
-        </Text>
+        <View>
+          <Text className="text-2xl font-bold text-pink-500 my-8 mt-20 text-center">
+            My To-Do List
+          </Text>
+          <CreateTask onCreate={onCreate} />
+        </View>
       }
       renderItem={({ item }) => (
         <Card
@@ -34,7 +38,6 @@ const TaskList = ({ tasks, onComplete, onDelete }: TaskListProps) => {
       )}
       contentContainerStyle={{
         flexGrow: 1,
-        justifyContent: 'center',
         paddingHorizontal: 16,
       }}
     />

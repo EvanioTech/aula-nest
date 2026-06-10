@@ -4,7 +4,7 @@ import TaskList from "@/components/tasks/TaskList";
 import useTasks from "@/hooks/useTasks";
 
 export default function TabOneScreen() {
-  const { tasks, completeTask, deleteTask } = useTasks();
+  const { tasks, completeTask, deleteTask, createTask } = useTasks();
 
   return (
     <LinearGradient
@@ -16,6 +16,7 @@ export default function TabOneScreen() {
         tasks={tasks}
         onComplete={completeTask}
         onDelete={deleteTask}
+        onCreate={createTask}
       />
         
    
