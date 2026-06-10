@@ -1,5 +1,6 @@
 import { FlatList, Text } from 'react-native';
-import Card from './Card';
+import Card from '../ui/Card';
+
 
 interface Task {
   id: string;
@@ -13,7 +14,9 @@ interface TaskListProps {
 
 const TaskList = ({ tasks }: TaskListProps) => {
   return (
+    
     <FlatList
+    
       data={tasks}
       keyExtractor={(item) => item.id}
       ListHeaderComponent={
@@ -24,8 +27,14 @@ const TaskList = ({ tasks }: TaskListProps) => {
       renderItem={({ item }) => (
         <Card title={item.title} completed={item.completed} />
       )}
-      contentContainerStyle={{ paddingHorizontal: 16 }}
+      contentContainerStyle={{ 
+        flexGrow: 1,
+        justifyContent: 'center',
+        paddingHorizontal: 16
+
+       }}
     />
+    
   );
 };
 

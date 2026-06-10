@@ -1,8 +1,6 @@
-
-import Card from "@/components/ui/Card";
 import "./../../global.css";
 import {LinearGradient} from "expo-linear-gradient";
-import { Text, View } from 'react-native';
+import TaskList from "@/components/tasks/TaskList";
 
 export default function TabOneScreen() {
   return (
@@ -10,12 +8,13 @@ export default function TabOneScreen() {
     colors={['#6a11cb', '#2575fc']}
     style={{ flex: 1 }}
   >
-    <View className="flex-1 items-center justify-center px-4 ">
-      <Text className="text-2xl font-bold text-pink-500 mb-40">My To-Do List</Text>
-      <Card title="Learn Expo Router" completed={false} />
-      <Card title="Learn Expo Router" completed={true} />
-      <Card title="Learn Expo Router" completed={false} />
-    </View>
+    
+      <TaskList tasks={[
+        { id: '1', title: 'Buy groceries', completed: false },
+        { id: '2', title: 'Walk the dog', completed: true },
+        { id: '3', title: 'Finish project', completed: false },
+      ]} />
+   
   </LinearGradient>
   );
 }
