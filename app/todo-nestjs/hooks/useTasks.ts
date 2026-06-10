@@ -21,7 +21,7 @@ const useTasks = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
+  useEffect(() => { 
     getTasks()
       .then((data: TaskAPI[]) => {
         const formattedTasks = data.map(task => ({

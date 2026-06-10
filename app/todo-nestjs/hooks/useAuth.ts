@@ -24,7 +24,7 @@ export function useAuth() {
   };
 
   const handleLogout = () => {
-    router.push('/');
+    router.push('/(auth)/login');
   };
 
   return { handleLogin, handleLogout, loading, error };
