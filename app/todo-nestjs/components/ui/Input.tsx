@@ -1,4 +1,6 @@
-import {View, Text, TextInput} from 'react-native';
+import { View, Text, TextInput } from 'react-native';
+import { ReactNode } from 'react';
+import { useState } from 'react';
 
 interface InputProps {
   label: string;
@@ -6,19 +8,26 @@ interface InputProps {
   secureTextEntry?: boolean;
   onChangeText?: (text: string) => void;
   value?: string;
+  icon?: ReactNode;
 }
 
-const Input = ({label, placeholder, secureTextEntry = false, onChangeText, value}: InputProps) => {
+const Input = ({ label, placeholder, secureTextEntry = false, onChangeText, value, icon }: InputProps) => {
+  const [isFocused, setIsFocused] = useState(false);
   return (
-    <View className="mb-4 p-4 flex flex-row rounded-lg w-full gap-2 px-4 border border-gray-300">
-      <Text className="text-lg text-black font-bold">{label}</Text>
-      <TextInput
-        className="bg-white p-2 rounded flex-1"
-        placeholder={placeholder}
-        onChangeText={onChangeText}
-        secureTextEntry={secureTextEntry}
-        value={value}
-      />
+    <View className="mb-4 w-full px-2">
+      <Text className="text-sm text-black font-bold mb-1">{label}</Text>
+      <View className={`flex-row items-center border rounded-lg px-4 bg-white ${isFocused ? 'border-purple-500' : 'border-gray-300'}`}>
+        {icon && <View className="mr-2">{icon}</View>}
+        <TextInput
+          className="w-full "
+          placeholder={placeholder}
+          onChangeText={onChangeText}
+          secureTextEntry={secureTextEntry}
+          value={value}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+        />
+      </View>
     </View>
   );
 };

@@ -4,6 +4,7 @@ import Button from '../ui/Button';
 import { useRouter } from 'expo-router';
 import {useSignUp} from '@/hooks/useSignUp';
 import { useState } from 'react';
+import Ionicons from '@react-native-vector-icons/ionicons';
 
 interface SignUpFormProps {
   title?: string;
@@ -26,13 +27,40 @@ const SignUpForm = ({ title }: SignUpFormProps) => {
     };
   return (
     <View className=" justify-center items-center px-2">
-      
-        <Text className="text-4xl  text-red-300 mb-28">{title}</Text>
+      <Ionicons name="person-add" size={84} color="#fff" className="mb-6" />
+        <Text className="text-4xl  text-white mb-28">{title}</Text>
         <View className="bg-white bg-opacity-20 p-6 rounded-lg w-full max-w-md items-center">
-      <Input label="Nome:" placeholder="Digite seu nome"  onChangeText={setName} value={name}/>
-      <Input label="Email:" placeholder="Digite seu email"  onChangeText={setEmail} value={email}/>
-      <Input label="Senha:" placeholder="Digite sua senha" secureTextEntry={true}  onChangeText={setPassword} value={password}/>
-      <Input label="Confirmar Senha:" placeholder="Digite sua senha novamente" secureTextEntry={true} onChangeText={setConfirmPassword} value={confirmPassword} />
+          
+      <Input
+  label="Nome:"
+  placeholder="Digite seu nome"
+  icon={<Ionicons name="person-outline" size={20} color="#9ca3af" />}
+  onChangeText={setName}
+  value={name}
+/>
+<Input
+  label="Email:"
+  placeholder="Digite seu email"
+  icon={<Ionicons name="mail-outline" size={20} color="#9ca3af" />}
+  onChangeText={setEmail}
+  value={email}
+/>
+<Input
+  label="Senha:"
+  placeholder="Digite sua senha"
+  icon={<Ionicons name="lock-closed-outline" size={20} color="#9ca3af" />}
+  secureTextEntry={true}
+  onChangeText={setPassword}
+  value={password}
+/>
+<Input
+  label="Confirmar Senha:"
+  placeholder="Digite sua senha novamente"
+  icon={<Ionicons name="lock-closed-outline" size={20} color="#9ca3af" />}
+  secureTextEntry={true}
+  onChangeText={setConfirmPassword}
+  value={confirmPassword}
+/>
       
       {error && <Text className="text-red-500 mb-2">{error}</Text>}
       <Button title="Cadastrar" onPress={() =>{
