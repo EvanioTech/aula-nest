@@ -1,7 +1,6 @@
 
 import {LinearGradient} from 'expo-linear-gradient';
 import { cssInterop } from 'nativewind';
-
 import LoginForm from '@/components/auth/LoginForm';
 
 
