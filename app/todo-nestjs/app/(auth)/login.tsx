@@ -1,8 +1,7 @@
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+
 import {LinearGradient} from 'expo-linear-gradient';
 import { cssInterop } from 'nativewind';
-import Button from '../../components/ui/Button';
-import Input from '@/components/ui/Input';
+
 import LoginForm from '@/components/auth/LoginForm';
 
 
